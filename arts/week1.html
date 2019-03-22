@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>【ARTS】第一周 | Kirogi&#39;s Tech Blog</title>
+    <meta name="description" content="即使明天的世界会垮掉，依然种下自己的苹果树">
+    <link rel="icon" href="/img/logo.jpg">
+    
+    <link rel="preload" href="/assets/css/0.styles.03cbd86d.css" as="style"><link rel="preload" href="/assets/js/app.5b5d5fe2.js" as="script"><link rel="preload" href="/assets/js/6.b45f8f15.js" as="script"><link rel="prefetch" href="/assets/js/3.9b7b2394.js"><link rel="prefetch" href="/assets/js/4.3c1a3980.js"><link rel="prefetch" href="/assets/js/5.5c30a2bf.js"><link rel="prefetch" href="/assets/js/7.14d76295.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.646363fc.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.03cbd86d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header id="navbarWrapper" class="navbar"><div class="sidebar-button"><i class="iconfont reco-menu"></i></div> <a href="/" class="home-link router-link-active"><img src="/img/logo.jpg" alt="Kirogi's Tech Blog" class="logo"> <span class="site-name">Kirogi's Tech Blog</span></a> <div class="links" style="max-width:nullpx;"><div class="side-search-wrapper"><div class="search-box" data-v-1b2e3b29><input aria-label="Search" autocomplete="off" spellcheck="false" value="" data-v-1b2e3b29> <i class="iconfont reco-search" data-v-1b2e3b29></i> <!----></div></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/arts/exercise.html" class="nav-link"><i class="iconfont undefined"></i>
+  ARTS训练营
+</a></div><div class="nav-item"><a href="/arts/exercis.html" class="nav-link"><i class="iconfont undefined"></i>
+  随笔
+</a></div><div class="nav-item"><a href="/front-end/exercis.html" class="nav-link"><i class="iconfont undefined"></i>
+  前端
+</a></div><div class="nav-item"><a href="/arts/exercis.html" class="nav-link"><i class="iconfont undefined"></i>
+  后端
+</a></div><div class="nav-item"><a href="/arts/exercis.html" class="nav-link"><i class="iconfont undefined"></i>
+  分享
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><div class="side-search-wrapper"><div class="search-box" data-v-1b2e3b29><input aria-label="Search" autocomplete="off" spellcheck="false" value="" data-v-1b2e3b29> <i class="iconfont reco-search" data-v-1b2e3b29></i> <!----></div></div> <nav class="nav-links"><div class="nav-item"><a href="/arts/exercise.html" class="nav-link"><i class="iconfont undefined"></i>
+  ARTS训练营
+</a></div><div class="nav-item"><a href="/arts/exercis.html" class="nav-link"><i class="iconfont undefined"></i>
+  随笔
+</a></div><div class="nav-item"><a href="/front-end/exercis.html" class="nav-link"><i class="iconfont undefined"></i>
+  前端
+</a></div><div class="nav-item"><a href="/arts/exercis.html" class="nav-link"><i class="iconfont undefined"></i>
+  后端
+</a></div><div class="nav-item"><a href="/arts/exercis.html" class="nav-link"><i class="iconfont undefined"></i>
+  分享
+</a></div> <!----></nav>  <!----> </div> <div class="page" data-v-4bd020d4> <div class="page-title" data-v-4bd020d4><h1 data-v-4bd020d4>【ARTS】第一周</h1> <hr data-v-4bd020d4> <div data-v-2c25cede data-v-4bd020d4><i class="iconfont reco-account" data-v-2c25cede><span data-v-2c25cede>Kirogi's Tech Blog</span></i> <i class="iconfont reco-date" data-v-2c25cede><span data-v-2c25cede>3/23/2019</span></i> <!----> <!----></div></div> <div class="content" data-v-4bd020d4><h1 id="algorithm（两数相加）"><a href="#algorithm（两数相加）" aria-hidden="true" class="header-anchor">#</a> Algorithm（两数相加）</h1> <hr> <ul><li>描述：给出两个非空的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</li> <li>思路：独立进行算法设计的时候，思维进入误区，没能从链表的角度来考虑，导致在数据溢出的时候没法通过验证。最终还是采纳了题解的解析方法，理解透了后进行编码，有待加强。</li> <li>性能：时间复杂度O(max(l1.size, l2.size)); 空间复杂度：O(max(l1.size, l2.size))</li> <li>编码（java）：</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    int carryValue = 0;
+    int currSum = 0;
+    ListNode resultNode = new ListNode(0);
+    ListNode moveL1 = l1, moveL2 = l2, moveResult = resultNode;
+
+    while (moveL1 != null || moveL2 != null) {
+        currSum = (moveL1 == null? 0:moveL1.val) + (moveL2 == null? 0:moveL2.val) + carryValue;
+        carryValue = currSum / 10;
+        moveResult.next = new ListNode(currSum % 10);
+
+        moveResult = moveResult.next;
+        if (moveL1 != null) moveL1 = moveL1.next;
+        if (moveL2 != null) moveL2 = moveL2.next;
+    }
+
+    if (carryValue &gt; 0) {
+        moveResult.next = new ListNode(carryValue);
+    }
+    return resultNode.next;
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><h1 id="review-基于vuepress的博客构建"><a href="#review-基于vuepress的博客构建" aria-hidden="true" class="header-anchor">#</a> Review (基于VuePress的博客构建)</h1> <hr> <ul><li><p>介绍：VuePress由两部分组成：一个是简略的静态网站生成器，另一个是书写技术文档的默认主题系统。它主要来源于支持Vue的子项目的文档需求。
+基于VuePress生成的每个页面都有预渲染的静态HTML，它具有良好的加载性能和友好的搜索引擎。一旦页面被加载，Vue将对其管理并进行单页面处理，
+而其他页面则在需要的时候进行加载。</p></li> <li><p>工作原理：VuePress网站是由Vue、Vue Router、webpack驱动。如果你使用过Vue，在你开发自定义主体的时候，你可能会注意到似曾相识的开发体验。
+我们在构建的时候，会根据应用的版本创建服务端渲染，虚拟访问每条路径来渲染相应的HTML。这个方法的灵感来源于Nuxt的nuxt generate命令和其他项目，
+比如：Gatsby。每个markdown文件都用markdown-it编译进HTML并作为Vue组件的模板处理。如果你想嵌入动态的内容，这里允许你直接在markdown中使用VUe。</p></li> <li><p>特性：</p></li></ul> <blockquote></blockquote> <p>1.基于技术文档优化的内置markdown扩展</p> <blockquote></blockquote> <p>2.markdown文件中使用Vue具备的功能特性</p> <blockquote></blockquote> <p>3.Vue驱动的自定义主题系统</p> <blockquote></blockquote> <p>4.自动生成Service Worker</p> <blockquote></blockquote> <p>5.集成Google分析器</p> <blockquote></blockquote> <p>6.基于Git的最新时间更新</p> <blockquote></blockquote> <p>7.支持多语言</p> <blockquote></blockquote> <p>8.默认主题包括：</p> <blockquote><p>响应式布局；主页可选；简洁的开箱即用搜索功能；Algolia搜索；自定义导航栏和侧边栏；自动生成Github链接和页面链接。</p></blockquote> <h1 id="tip"><a href="#tip" aria-hidden="true" class="header-anchor">#</a> Tip</h1> <hr> <p>ES6中扩展运算符：&quot;...&quot;，引用、组合、拆分等使得代码看起来相当简洁，示例如下：</p> <blockquote></blockquote> <p>1.console.log([a,b,b]) ==&gt; a b c</p> <blockquote></blockquote> <p>2.let add = (x, y) =&gt; x + y
+let numbers = [3, 45]
+console.log(add(...numbers)) ==&gt; 45 + 3</p> <blockquote></blockquote> <p>3.let arr1 = ['a', 'b']
+let arr2 = ['c']
+let arr3 = ['d', 'e']
+[...arr1, ...arr2, ...arr3]  ==&gt; ['a', 'b', 'c', 'd', 'e']</p> <h1 id="share"><a href="#share" aria-hidden="true" class="header-anchor">#</a> Share</h1> <p>https://blog.csdn.net/CDUT100/article/details/77460629</p></div> <!----> <!----> <div class="page-edit" data-v-4bd020d4><!----> <!----></div> <!----> </div> <div class="valine-wrapper" data-v-63f18ac0><div id="valine" style="display:;" data-v-63f18ac0></div></div> <!----> <!----> <div class="back-to-ceiling" style="right:1rem;bottom:3rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;background-color:rgba(231, 234, 241,.5);display:none;" data-v-41016a8b data-v-41016a8b><i class="iconfont reco-up" data-v-41016a8b></i></div></div></div>
+    <script src="/assets/js/app.5b5d5fe2.js" defer></script><script src="/assets/js/6.b45f8f15.js" defer></script>
+  </body>
+</html>
